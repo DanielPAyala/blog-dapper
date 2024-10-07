@@ -1,9 +1,10 @@
 using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 using blog_dapper.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace blog_dapper.Controllers;
+namespace Blog_Dapper.Areas.Front.Controllers;
 
+[Area("Front")]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
