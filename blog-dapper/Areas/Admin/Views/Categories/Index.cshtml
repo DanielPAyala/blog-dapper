@@ -1,0 +1,49 @@
+@model IEnumerable<blog_dapper.Models.Category>
+
+@{
+    ViewData["Title"] = "Lista de Categorías";
+}
+
+<div class="row">
+    <div class="col-9">
+        <h1>Administrador de Categorías</h1>
+    </div>
+    <div class="col-3">
+        <a asp-action="Create" class="btn btn-primary float-end">
+            <i class="bi bi-plus-square"></i>
+            &nbsp;Agregar Categoría
+        </a>
+    </div>
+</div>
+
+<div class="card bg-light p-3">
+    <table class="table" id="tblCategorias">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Fecha de Creación</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        @*@foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.CategoryId)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CategoryId" class="btn btn-sm btn-warning">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.CategoryId" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }*@
+        </tbody>
+    </table>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/categories.js"></script>
+}
