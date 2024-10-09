@@ -20,18 +20,39 @@ public class CategoriesController : Controller
         var categories = _categoryRepository.GetCategories();
         return View(categories);
     }
-    
+
     [HttpGet]
     public IActionResult Create()
     {
         return View();
     }
-    
+
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Create(Category category)
     {
         if (!ModelState.IsValid) return View(category);
         _categoryRepository.CreateCategory(category);
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    public IActionResult Edit(int? id)
+    {
+        // if (id == null) return NotFound();
+        if(id == null) return View("Error");
+        var category = _categoryRepository.GetCategory(id.GetValueOrDefault());
+        if (category == null) return NotFound();
+        return View(category);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Edit(int id, [Bind("CategoryId, Name")] Category category)
+    {
+        if (id != category.CategoryId) return NotFound();
+        if (!ModelState.IsValid) return View(category);
+        _categoryRepository.UpdateCategory(category);
         return RedirectToAction(nameof(Index));
     }
 
@@ -41,6 +62,14 @@ public class CategoriesController : Controller
     public IActionResult GetCategories()
     {
         return Json(new { data = _categoryRepository.GetCategories() });
+    }
+    
+    [HttpDelete]
+    public IActionResult DeleteCategory(int? id)
+    {
+        if (id == null) return Json(new { success = false, message = "Error while deleting" });
+        _categoryRepository.DeleteCategory(id.GetValueOrDefault());
+        return Json(new { success = true, message = "Delete successful" });
     }
 
     #endregion

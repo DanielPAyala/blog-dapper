@@ -4,7 +4,7 @@ namespace Blog_Dapper.Repositories;
 
 public interface ICategoryRepository
 {
-    Category GetCategory(int id);
+    Category? GetCategory(int id);
     List<Category> GetCategories();
     Category CreateCategory(Category category);
     Category UpdateCategory(Category category);

@@ -5,19 +5,14 @@ using Dapper;
 
 namespace Blog_Dapper.Repositories;
 
-public class CategoryRepository : ICategoryRepository
+public class CategoryRepository(IConfiguration configuration) : ICategoryRepository
 {
-    private readonly IDbConnection _dbConnection;
+    private readonly IDbConnection _dbConnection = new SqlConnection(configuration.GetConnectionString("SQLLocalDB"));
 
-    public CategoryRepository(IConfiguration configuration)
+    public Category? GetCategory(int id)
     {
-        _dbConnection = new SqlConnection(configuration.GetConnectionString("SQLLocalDB"));
-    }
-
-    public Category GetCategory(int id)
-    {
-        var sql = "SELECT * FROM Category WHERE CategoryId = @Id";
-        return _dbConnection.Query<Category>(sql, new { Id = id }).Single();
+        const string sql = "SELECT * FROM Category WHERE CategoryId = @Id";
+        return _dbConnection.Query<Category>(sql, new { Id = id }).SingleOrDefault();
     }
 
     public List<Category> GetCategories()

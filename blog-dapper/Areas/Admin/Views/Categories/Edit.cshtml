@@ -1,0 +1,28 @@
+@model blog_dapper.Models.Category
+
+@{
+    ViewData["Title"] = "Editar Categoría";
+}
+
+<h1>Editar Categoría</h1>
+<div class="row p-4">
+    <div class="col-4 offset-4">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="CategoryId"/>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div>
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mt-4 d-flex justify-content-between gap-2">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary form-control">Guardar Cambios</button>
+                </div>
+                <div class="col">
+                    <a asp-action="Index" class="btn btn-warning form-control">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
