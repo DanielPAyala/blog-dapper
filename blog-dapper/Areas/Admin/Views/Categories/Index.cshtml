@@ -17,7 +17,7 @@
 </div>
 
 <div class="card bg-light p-3">
-    <table class="table" id="tblCategorias">
+    <table class="table" id="tblCategories">
         <thead>
         <tr>
             <th>Id</th>
@@ -45,5 +45,8 @@
 
 @section Scripts
 {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <script src="~/js/categories.js"></script>
 }

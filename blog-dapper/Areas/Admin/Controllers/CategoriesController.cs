@@ -17,8 +17,7 @@ public class CategoriesController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        var categories = _categoryRepository.GetCategories();
-        return View(categories);
+        return View();
     }
 
     [HttpGet]
@@ -39,8 +38,7 @@ public class CategoriesController : Controller
     [HttpGet]
     public IActionResult Edit(int? id)
     {
-        // if (id == null) return NotFound();
-        if(id == null) return View("Error");
+        if (id == null) return NotFound();
         var category = _categoryRepository.GetCategory(id.GetValueOrDefault());
         if (category == null) return NotFound();
         return View(category);

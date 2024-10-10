@@ -9,7 +9,7 @@ public class ArticleRepository(IConfiguration configuration) : IArticleRepositor
 {
     private readonly IDbConnection _dbConnection = new SqlConnection(configuration.GetConnectionString("SQLLocalDB"));
 
-    public Article? GetArticle(int id)
+    public Article GetArticle(int id)
     {
         const string sql = "SELECT * FROM Article WHERE ArticleId = @Id";
         return _dbConnection.Query<Article>(sql, new { Id = id }).SingleOrDefault();
@@ -50,5 +50,18 @@ public class ArticleRepository(IConfiguration configuration) : IArticleRepositor
     {
         const string sql = "DELETE FROM Article WHERE ArticleId = @Id";
         _dbConnection.Execute(sql, new { Id = id });
+    }
+
+    public List<Article> GetArticlesWithCategory()
+    {
+        const string sql =
+            "SELECT a.ArticleId, a.Title, a.Description, a.Image, a.State, a.CreatedAt, a.CategoryId, c.CategoryId, c.Name, c.CreatedAt FROM Article a INNER JOIN Category c ON a.CategoryId = c.CategoryId ORDER BY a.CreatedAt DESC";
+        var articles = _dbConnection.Query<Article, Category, Article>(sql, (a, c) =>
+        {
+            a.Category = c;
+            return a;
+        }, splitOn: "CategoryId");
+
+        return articles.Distinct().ToList();
     }
 }

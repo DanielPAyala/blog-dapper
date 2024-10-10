@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 
 var app = builder.Build();
 
@@ -25,6 +26,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Front}/{controller=Home}/{action=Index}/{id?}");
+    // pattern: "{area=Front}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Admin}/{controller=Articles}/{action=Index}/{id?}");
 
 app.Run();

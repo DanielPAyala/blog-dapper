@@ -2,6 +2,7 @@ using System.Data;
 using System.Data.SqlClient;
 using blog_dapper.Models;
 using Dapper;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Blog_Dapper.Repositories;
 
@@ -45,5 +46,12 @@ public class CategoryRepository(IConfiguration configuration) : ICategoryReposit
     {
         const string sql = "DELETE FROM Category WHERE CategoryId = @Id";
         _dbConnection.Execute(sql, new { Id = id });
+    }
+
+    public IEnumerable<SelectListItem> GetListCategories()
+    {
+        const string sql = "SELECT * FROM Category";
+        var categories = _dbConnection.Query<Category>(sql).ToList();
+        return new SelectList(categories, "CategoryId", "Name");
     }
 }

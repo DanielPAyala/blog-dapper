@@ -4,25 +4,37 @@ $(document).ready(function () {
 });
 
 function loadDataTable() {
-    dataTable = $('#tblCategories').DataTable({
+    dataTable = $('#tblArticles').DataTable({
         "ajax": {
-            "url": "/Admin/Categories/GetCategories",
+            "url": "/Admin/Articles/GetArticles",
             "type": "GET",
             "datatype": "json"
         },
         "columns": [
-            {"data": "categoryId", "width": "5%"},
-            {"data": "name", "width": "40%"},
-            {"data": "createdAt", "width": "20%"},
+            {"data": "articleId", "width": "5%"},
+            {"data": "title", "width": "40%"},
             {
-                "data": "categoryId",
+                "data": "image",
                 "render": function (data) {
                     return `
                         <div class="text-center">
-                            <a href="/admin/categories/Edit/${data}" class="btn btn-success text-white" style="cursor:pointer;">
+                            <img src="../${data}" alt="Articulo" style="width: 100px; height: 100px;" />
+                        </div>
+                    `;
+                }, "width": "10%"
+            },
+            {"data": "state", "width": "5%"},
+            {"data": "category.name", "width": "10%"},
+            {"data": "createdAt", "width": "20%"},
+            {
+                "data": "articleId",
+                "render": function (data) {
+                    return `
+                        <div class="text-center">
+                            <a href="/admin/articles/edit/${data}" class="btn btn-success text-white" style="cursor:pointer;">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
-                            <a onclick=Delete("/admin/categories/DeleteCategory/${data}") class="btn btn-danger text-white" style="cursor:pointer;">
+                            <a onclick=Delete("/admin/articles/deletearticle/${data}") class="btn btn-danger text-white" style="cursor:pointer;">
                                 <i class="bi bi-x-square"></i>
                             </a>
                         </div>
@@ -36,7 +48,7 @@ function loadDataTable() {
 function Delete(url) {
     swal({
         title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this category!",
+        text: "Once deleted, you will not be able to recover this article!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
