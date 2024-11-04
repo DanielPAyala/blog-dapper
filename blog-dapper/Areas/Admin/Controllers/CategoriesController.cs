@@ -1,5 +1,6 @@
 using blog_dapper.Models;
 using Blog_Dapper.Repositories;
+using Blog_Dapper.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog_Dapper.Areas.Admin.Controllers;

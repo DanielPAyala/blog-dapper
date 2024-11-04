@@ -1,6 +1,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using blog_dapper.Models;
+using Blog_Dapper.Repositories.Interfaces;
 using Dapper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -10,7 +11,7 @@ public class CategoryRepository(IConfiguration configuration) : ICategoryReposit
 {
     private readonly IDbConnection _dbConnection = new SqlConnection(configuration.GetConnectionString("SQLLocalDB"));
 
-    public Category? GetCategory(int id)
+    public Category GetCategory(int id)
     {
         const string sql = "SELECT * FROM Category WHERE CategoryId = @Id";
         return _dbConnection.Query<Category>(sql, new { Id = id }).SingleOrDefault();

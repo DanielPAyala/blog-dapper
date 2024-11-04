@@ -1,6 +1,6 @@
 using blog_dapper.Models;
 
-namespace Blog_Dapper.Repositories;
+namespace Blog_Dapper.Repositories.Interfaces;
 
 public interface IArticleRepository
 {

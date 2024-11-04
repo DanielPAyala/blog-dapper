@@ -1,4 +1,5 @@
 using Blog_Dapper.Repositories;
+using Blog_Dapper.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

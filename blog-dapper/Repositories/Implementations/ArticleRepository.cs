@@ -1,6 +1,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using blog_dapper.Models;
+using Blog_Dapper.Repositories.Interfaces;
 using Dapper;
 
 namespace Blog_Dapper.Repositories;

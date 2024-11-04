@@ -14,11 +14,15 @@ public class Article
     public string Description { get; set; }
 
     public string Image { get; set; }
+    
     public bool State { get; set; }
+    
     public DateTime CreatedAt { get; set; }
 
     [Required(ErrorMessage = "Categoría es requerida")]
     public int CategoryId { get; set; }
     
     public virtual Category Category { get; set; }
+    
+    public List<Comment> Comments { get; set; }
 }

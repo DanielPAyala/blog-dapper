@@ -1,11 +1,11 @@
 using blog_dapper.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Blog_Dapper.Repositories;
+namespace Blog_Dapper.Repositories.Interfaces;
 
 public interface ICategoryRepository
 {
-    Category? GetCategory(int id);
+    Category GetCategory(int id);
     List<Category> GetCategories();
     Category CreateCategory(Category category);
     Category UpdateCategory(Category category);
