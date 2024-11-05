@@ -9,4 +9,5 @@ public interface ICommentRepository
     Comment CreateComment(Comment comment);
     Comment UpdateComment(Comment comment);
     void DeleteComment(int commentId);
+    List<Comment> GetCommentsWithArticle();
 }

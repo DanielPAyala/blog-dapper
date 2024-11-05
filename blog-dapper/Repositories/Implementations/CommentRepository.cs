@@ -49,4 +49,16 @@ public class CommentRepository(IConfiguration configuration) : ICommentRepositor
         const string sql = "DELETE FROM Comment WHERE CommentId = @Id";
         _dbConnection.Execute(sql, new { Id = commentId });
     }
+
+    public List<Comment> GetCommentsWithArticle()
+    {
+        const string sql =
+            "SELECT c.CommentId, c.Title, c.Message, c.ArticleId, c.CreatedAt, a.ArticleId, a.Title FROM Comment c INNER JOIN Article a ON c.ArticleId = a.ArticleId ORDER BY c.CreatedAt DESC";
+        var comments = _dbConnection.Query<Comment, Article, Comment>(sql, (c, a) =>
+        {
+            c.Article = a;
+            return c;
+        }, splitOn: "ArticleId").ToList();
+        return comments.Distinct().ToList();
+    }
 }
