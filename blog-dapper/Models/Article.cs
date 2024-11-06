@@ -4,6 +4,11 @@ namespace blog_dapper.Models;
 
 public class Article
 {
+    public Article()
+    {
+        Tags = [];
+    }
+    
     [Key] public int ArticleId { get; set; }
 
     [Required(ErrorMessage = "Título es requerido")]

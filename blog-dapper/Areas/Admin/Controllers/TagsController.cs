@@ -53,6 +53,12 @@ public class TagsController : Controller
         _tagRepository.UpdateTag(tag);
         return RedirectToAction(nameof(Index));
     }
+    
+    [HttpGet]
+    public IActionResult ArticlesWithTags()
+    {
+        return View();
+    }
 
     #region
 

@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Lista de Etiquetas";
+}
+
+<div class="row">
+    <div class="col-9">
+        <h1>Lista de Etiquetas</h1>
+    </div>
+</div>
+
+<div class="card bg-light p-3">
+    <table class="table" id="tblArticlesTags">
+        <thead>
+        <tr>
+            <th>Id Artículo</th>
+            <th>Título</th>
+            <th>Etiqueta</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/articleTags.js"></script>
+}
