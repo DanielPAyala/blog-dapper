@@ -1,14 +1,13 @@
-@model blog_dapper.Models.Category
+@model blog_dapper.Models.Tag
 
 @{
-    ViewData["Title"] = "Editar Categoría";
+    ViewData["Title"] = "Crear Etiqueta";
 }
 
-<h1>Editar Categoría</h1>
+<h1>Crear Etiqueta</h1>
 <div class="row p-4">
     <div class="col-4 offset-4">
-        <form asp-action="Edit">
-            <input type="hidden" asp-for="CategoryId"/>
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div>
                 <label asp-for="Name" class="form-label"></label>
@@ -17,7 +16,7 @@
             </div>
             <div class="mt-4 d-flex justify-content-between gap-2">
                 <div class="col">
-                    <button type="submit" class="btn btn-primary form-control">Guardar Cambios</button>
+                    <button type="submit" class="btn btn-primary form-control">Guardar</button>
                 </div>
                 <div class="col">
                     <a asp-action="Index" class="btn btn-warning form-control">Cancelar</a>

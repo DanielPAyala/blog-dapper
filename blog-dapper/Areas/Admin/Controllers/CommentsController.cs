@@ -22,7 +22,7 @@ public class CommentsController : Controller
 
     /*[HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(Comment comment)
+    public IActionResult Create([Bind("CommentId, Name")] Comment comment)
     {
         if (!ModelState.IsValid) return View(comment);
         _commentRepository.CreateComment(comment);

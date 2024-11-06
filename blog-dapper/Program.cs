@@ -9,6 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<ITagRepository, TagRepository>();
 
 var app = builder.Build();
 

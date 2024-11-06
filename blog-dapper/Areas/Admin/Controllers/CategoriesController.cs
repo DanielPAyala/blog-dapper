@@ -29,7 +29,7 @@ public class CategoriesController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(Category category)
+    public IActionResult Create([Bind("CategoryId, Name")] Category category)
     {
         if (!ModelState.IsValid) return View(category);
         _categoryRepository.CreateCategory(category);

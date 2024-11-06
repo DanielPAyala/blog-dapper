@@ -25,4 +25,6 @@ public class Article
     public virtual Category Category { get; set; }
     
     public List<Comment> Comments { get; set; }
+    
+    public List<Tag> Tags { get; set; }
 }

@@ -1,14 +1,15 @@
-@model blog_dapper.Models.Category
+@model blog_dapper.Models.Tag
 
 @{
-    ViewData["Title"] = "Editar Categoría";
+    ViewData["Title"] = "Editar Etiqueta";
 }
 
-<h1>Editar Categoría</h1>
+
+<h1>Editar Etiqueta</h1>
 <div class="row p-4">
     <div class="col-4 offset-4">
         <form asp-action="Edit">
-            <input type="hidden" asp-for="CategoryId"/>
+            <input type="hidden" asp-for="TagId"/>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div>
                 <label asp-for="Name" class="form-label"></label>
