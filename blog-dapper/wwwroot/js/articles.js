@@ -12,7 +12,7 @@ function loadDataTable() {
         },
         "columns": [
             {"data": "articleId", "width": "5%"},
-            {"data": "title", "width": "40%"},
+            {"data": "title", "width": "30%"},
             {
                 "data": "image",
                 "render": function (data) {
@@ -37,9 +37,12 @@ function loadDataTable() {
                             <a onclick=Delete("/admin/articles/deletearticle/${data}") class="btn btn-danger text-white" style="cursor:pointer;">
                                 <i class="bi bi-x-square"></i>
                             </a>
+                            <a href="/admin/articles/assignTags/${data}" class="btn btn-secondary text-white" style="cursor:pointer;">
+                                <i class="bi bi-tags-fill"></i>
+                            </a>
                         </div>
                     `;
-                }, "width": "35%"
+                }, "width": "30%"
             }
         ],
     })

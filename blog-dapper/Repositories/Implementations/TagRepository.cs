@@ -10,7 +10,7 @@ namespace Blog_Dapper.Repositories;
 public class TagRepository(IConfiguration configuration) : ITagRepository
 {
     private readonly IDbConnection _dbConnection = new SqlConnection(configuration.GetConnectionString("SQLLocalDB"));
-    
+
     public Tag GetTag(int id)
     {
         const string sql = "SELECT * FROM Tag WHERE TagId = @Id";
@@ -58,11 +58,19 @@ public class TagRepository(IConfiguration configuration) : ITagRepository
 
     public List<Article> GetArticlesWithTags()
     {
-        const string sql = "SELECT a.ArticleId, a.Title, t.TagId, t.Name FROM Article a \nINNER JOIN ArticleTags ae ON ae.ArticleId = a.ArticleId\nINNER JOIN Tag t ON t.TagId = ae.TagId";
+        const string sql =
+            "SELECT a.ArticleId, a.Title, t.TagId, t.Name FROM Article a INNER JOIN ArticleTags ae ON ae.ArticleId = a.ArticleId INNER JOIN Tag t ON t.TagId = ae.TagId";
         return _dbConnection.Query<Article, Tag, Article>(sql, (article, tag) =>
         {
             article.Tags.Add(tag);
             return article;
         }, splitOn: "TagId").ToList();
+    }
+
+    public ArticleTags AssignTags(ArticleTags articleTags)
+    {
+        const string sql = "INSERT INTO ArticleTags (ArticleId, TagId) VALUES (@ArticleId, @TagId)";
+        _dbConnection.Execute(sql, articleTags);
+        return articleTags;
     }
 }

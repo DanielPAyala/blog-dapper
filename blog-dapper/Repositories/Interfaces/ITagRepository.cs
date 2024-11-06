@@ -13,4 +13,5 @@ public interface ITagRepository
     IEnumerable<SelectListItem> GetListTags();
     
     List<Article> GetArticlesWithTags();
+    ArticleTags AssignTags(ArticleTags articleTags);
 }

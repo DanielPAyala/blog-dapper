@@ -11,12 +11,14 @@ public class ArticlesController : Controller
     private readonly IArticleRepository _articleRepository;
     private readonly ICategoryRepository _categoryRepository;
     private readonly IWebHostEnvironment _hostingEnvironment;
+    private readonly ITagRepository _tagRepository;
 
-    public ArticlesController(IArticleRepository articleRepository, ICategoryRepository categoryRepository, IWebHostEnvironment hostingEnvironment)
+    public ArticlesController(IArticleRepository articleRepository, ICategoryRepository categoryRepository, IWebHostEnvironment hostingEnvironment, ITagRepository tagRepository)
     {
         _articleRepository = articleRepository;
         _categoryRepository = categoryRepository;
         _hostingEnvironment = hostingEnvironment;
+        _tagRepository = tagRepository;
     }
 
     [HttpGet]
@@ -101,6 +103,33 @@ public class ArticlesController : Controller
         }
         
         _articleRepository.UpdateArticle(article);
+        return RedirectToAction(nameof(Index));
+    }
+    
+    public IActionResult AssignTags(int? id)
+    {
+        if (id == null) return NotFound();
+        var article = _articleRepository.GetArticle(id.GetValueOrDefault());
+        if (article == null) return NotFound();
+        
+        ViewBag.Tags = _tagRepository.GetListTags();
+        return View(article);
+    }
+    
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult AssignTags(int articleId, int tagId)
+    {
+        if (articleId == 0 || tagId == 0)
+        {
+            return NotFound();
+        }
+        var articleTags = new ArticleTags
+        {
+            ArticleId = articleId,
+            TagId = tagId
+        };
+        _tagRepository.AssignTags(articleTags);
         return RedirectToAction(nameof(Index));
     }
 
